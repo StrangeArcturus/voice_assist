@@ -61,7 +61,6 @@ import pymorphy2 # для склонения этих слов
 from vosk import Model, KaldiRecognizer  # оффлайн-распознавание от Vosk
 from googlesearch import search  # поиск в Google
 from pyowm import OWM  # использование OpenWeatherMap для получения данных о погоде
-from termcolor import colored  # вывод цветных логов (для выделения распознанной речи)
 from dotenv import load_dotenv  # загрузка информации из .env-файла
 import speech_recognition  # распознавание пользовательской речи (Speech-To-Text)
 import googletrans  # использование системы Google Translate
@@ -70,36 +69,15 @@ import wikipediaapi  # поиск определений в Wikipedia
 import random  # генератор случайных чисел
 import webbrowser  # работа с использованием браузера по умолчанию (открывание вкладок с web-страницей)
 import traceback  # вывод traceback без остановки работы программы при отлове исключений
-import json  # работа с json-файлами и json-строками
 import wave  # создание и чтение аудиофайлов формата wav
 import os  # работа с файловой системой
 import pyautogui # работа с курсором
 
 from TOKEN import OWM_TOKEN
+from translation import Translation
 
 
 pyautogui.FAILSAFE = False
-
-
-class Translation:
-    """
-    Получение вшитого в приложение перевода строк для создания мультиязычного ассистента
-    """
-    with open("translations.json", "r", encoding="UTF-8") as file:
-        translations = json.load(file)
-
-    def get(self, text: str):
-        """
-        Получение перевода строки из файла на нужный язык (по его коду)
-        :param text: текст, который требуется перевести
-        :return: вшитый в приложение перевод текста
-        """
-        if text in self.translations:
-            return self.translations[text][assistant.speech_language]
-        else:
-            # в случае отсутствия перевода происходит вывод сообщения об этом в логах и возврат исходного текста
-            print(colored("Not translated phrase: {}".format(text), "red"))
-            return text
 
 
 class OwnerPerson:
