@@ -193,3 +193,30 @@ class VoiceAssistantWithInternetSkills(VoiceAssistant):
         self.play_voice_assistant_speech(self.translator.get("The temperature is {} degrees Celsius").format(str(temperature)))
         self.play_voice_assistant_speech(self.translator.get("The wind speed is {} meters per second").format(str(wind_speed)))
         self.play_voice_assistant_speech(self.translator.get("The pressure is {} mm Hg").format(str(pressure)))
+
+    def run_person_through_social_nets_databases(self, *args: tuple):
+        """
+        Поиск человека по базе данных социальных сетей ВКонтакте и Facebook
+        :param args: имя, фамилия TODO город
+        """
+        if not args[0]: return
+
+        google_search_term = " ".join(args[0])
+        vk_search_term = "_".join(args[0])
+        fb_search_term = "-".join(args[0])
+
+        # открытие ссылки на поисковик в браузере
+        url = "https://google.com/search?q=" + google_search_term + " site: vk.com"
+        webbrowser.get().open(url)
+
+        url = "https://google.com/search?q=" + google_search_term + " site: facebook.com"
+        webbrowser.get().open(url)
+
+        # открытие ссылкок на поисковики социальных сетей в браузере
+        vk_url = "https://vk.com/people/" + vk_search_term
+        webbrowser.get().open(vk_url)
+
+        fb_url = "https://www.facebook.com/public/" + fb_search_term
+        webbrowser.get().open(fb_url)
+
+        self.play_voice_assistant_speech(self.translator.get("Here is what I found for {} on social nets").format(google_search_term))
