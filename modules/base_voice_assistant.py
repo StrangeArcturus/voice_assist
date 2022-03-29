@@ -8,8 +8,8 @@ import random
 from time import sleep # для "сна" ассистента
 from datetime import datetime as dt # работа с датой и временем
 
-import translation
-import owner_person
+import modules.translation
+import modules.owner_person
 
 
 class __VoiceAssistant:
@@ -59,7 +59,7 @@ class VoiceAssistant(__VoiceAssistant):
     Базовая модель голосовго ассистента,
     наследующая модель с первичными данными и настройками
     """
-    def set_dependies(self, translator: translation.Translation, person: owner_person.OwnerPerson) -> None:
+    def set_dependies(self, translator: modules.translation.Translation, person: modules.owner_person.OwnerPerson) -> None:
         self.translator = translator
         self.person = person
 

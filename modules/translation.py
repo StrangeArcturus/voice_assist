@@ -1,14 +1,14 @@
 import json  # работа с json-файлами и json-строками
 from termcolor import colored  # вывод цветных логов (для выделения распознанной речи)
 
-import base_voice_assistant as base_voice_assistant
+import modules.base_voice_assistant
 
 
 class Translation:
     """
     Получение вшитого в приложение перевода строк для создания мультиязычного ассистента
     """    
-    def set_dependies(self, assistant: base_voice_assistant.VoiceAssistant) -> None:
+    def set_dependies(self, assistant: modules.base_voice_assistant.VoiceAssistant) -> None:
         self.assistant = assistant
 
     with open("translations.json", "r", encoding="UTF-8") as file:
