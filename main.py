@@ -54,18 +54,18 @@ https://pypi.org/
 """
 
 
-from datetime import datetime as dt # работа с датой и временем
-from num2words import num2words as nw # для проговаривания слов
-import pymorphy2 # для склонения этих слов
-from dotenv import load_dotenv  # загрузка информации из .env-файла
-from termcolor import colored  # вывод цветных логов (для выделения распознанной речи)
 import os  # работа с файловой системой
 import pyautogui # работа с курсором
+import pymorphy2 # для склонения этих слов
+from termcolor import colored  # вывод цветных логов (для выделения распознанной речи)
+from dotenv import load_dotenv  # загрузка информации из .env-файла
+from num2words import num2words as nw # для проговаривания слов
+from datetime import datetime as dt # работа с датой и временем
 
-from modules.translation import Translation
-from modules.owner_person import OwnerPerson
-from modules.voice_assistant import VoiceAssistantWithAllSkills
-from modules.recognizer import Recognizer
+from modules import Recognizer
+from modules import Translation
+from modules import OwnerPerson
+from modules import VoiceAssistantWithAllSkills
 
 
 pyautogui.FAILSAFE = False
