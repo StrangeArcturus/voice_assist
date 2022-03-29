@@ -6,6 +6,3 @@ class OwnerPerson:
     home_city = ""
     native_language = ""
     target_language = ""
-
-
-person = OwnerPerson()

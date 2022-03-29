@@ -2,25 +2,27 @@ import speech_recognition  # распознавание пользователь
 from vosk import Model, KaldiRecognizer # оффлайн-распознавание от Vosk
 from termcolor import colored  # вывод цветных логов (для выделения распознанной речи)
 
-from translation import Translation, translator
-from voice_assistant import VoiceAssistant, assistant
+import translation
+import base_voice_assistant as base_voice_assistant
 
-
-import random
-import traceback
+import random  # генератор случайных чисел
+import traceback  # вывод traceback без остановки работы программы при отлове исключений
 import os
 import wave
 import json
 
 
 class Recognizer:
+    """
+    Класс, используемый для обработки и распознавания речи
+    """    
+    def set_dependies(self, translator: translation.Translation, assistant: base_voice_assistant.VoiceAssistant) -> None:
+        self.translator = translator
+        self.voice_assistant = assistant
+
     # инициализация инструментов распознавания и ввода речи
     recognizer = speech_recognition.Recognizer()
     microphone = speech_recognition.Microphone()
-
-    def __init__(self, translator: Translation, voice_assistant: VoiceAssistant) -> None:
-        self.translator = translator
-        self.voice_assistant = voice_assistant
 
     def record_and_recognize_audio(self, *args: tuple) -> str:
         """
@@ -106,6 +108,3 @@ class Recognizer:
             print(colored("Sorry, speech service is unavailable. Try again later", "red"))
 
         return recognized_data
-
-
-recognizer = Recognizer(translator, assistant)

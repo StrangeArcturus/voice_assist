@@ -8,8 +8,8 @@ import random
 from time import sleep # для "сна" ассистента
 from datetime import datetime as dt # работа с датой и временем
 
-from translation import Translation
-from owner_person import OwnerPerson
+import translation
+import owner_person
 
 
 class __VoiceAssistant:
@@ -55,11 +55,13 @@ class __VoiceAssistant:
 
 
 class VoiceAssistant(__VoiceAssistant):
-    def __init__(self, translator: Translation, person: OwnerPerson) -> None:
-        super().__init__()
+    """
+    Базовая модель голосовго ассистента,
+    наследующая модель с первичными данными и настройками
+    """
+    def set_dependies(self, translator: translation.Translation, person: owner_person.OwnerPerson) -> None:
         self.translator = translator
         self.person = person
-
 
     def play_greetings(self, *args: tuple):
         """
@@ -184,6 +186,10 @@ class VoiceAssistant(__VoiceAssistant):
         self.play_voice_assistant_speech(answer)
 
 
+class VoiceAssistantWithGUIControl(VoiceAssistant):
+    """
+    Модель, использующая автоматическое управление GUI'ем
+    """
     def window_off(self, *args: tuple):
         """
         Закрывает все окна, хе-хе~
@@ -195,4 +201,3 @@ class VoiceAssistant(__VoiceAssistant):
         pyautogui.moveTo(x=x, y=y, duration=1)
         pyautogui.click(clicks=1)
         self.play_voice_assistant_speech("окна закрываются")
-

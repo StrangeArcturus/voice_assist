@@ -1,14 +1,14 @@
 import json  # работа с json-файлами и json-строками
 from termcolor import colored  # вывод цветных логов (для выделения распознанной речи)
 
-from voice_assistant import VoiceAssistant, assistant
+import base_voice_assistant as base_voice_assistant
 
 
 class Translation:
     """
     Получение вшитого в приложение перевода строк для создания мультиязычного ассистента
-    """
-    def __init__(self, assistant: VoiceAssistant) -> None:
+    """    
+    def set_dependies(self, assistant: base_voice_assistant.VoiceAssistant) -> None:
         self.assistant = assistant
 
     with open("translations.json", "r", encoding="UTF-8") as file:
@@ -26,6 +26,3 @@ class Translation:
             # в случае отсутствия перевода происходит вывод сообщения об этом в логах и возврат исходного текста
             print(colored("Not translated phrase: {}".format(text), "red"))
             return text
-
-
-translator = Translation(assistant)

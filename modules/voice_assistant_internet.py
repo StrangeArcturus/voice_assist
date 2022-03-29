@@ -7,12 +7,16 @@ from pyowm import OWM  # использование OpenWeatherMap для пол
 import webbrowser  # работа с использованием браузера по умолчанию (открывание вкладок с web-страницей)
 import traceback
 
-from __voice_assistant import VoiceAssistant
+import base_voice_assistant as base_voice_assistant
 
 from TOKEN import OWM_TOKEN
 
 
-class VoiceAssistantWithInternetSkills(VoiceAssistant):
+class VoiceAssistantWithInternetSkills(base_voice_assistant.VoiceAssistant):
+    """
+    Класс, наследующий базовые модели ассистента
+    и дополняющий их методами с доступом в интернет
+    """
     def search_for_term_on_google(self, *args: tuple):
         """
         Поиск в Google с автоматическим открытием ссылок (на список результатов и на сами результаты, если возможно)
@@ -219,4 +223,6 @@ class VoiceAssistantWithInternetSkills(VoiceAssistant):
         fb_url = "https://www.facebook.com/public/" + fb_search_term
         webbrowser.get().open(fb_url)
 
-        self.play_voice_assistant_speech(self.translator.get("Here is what I found for {} on social nets").format(google_search_term))
+        self.play_voice_assistant_speech(
+            self.translator.get("Here is what I found for {} on social nets").format(google_search_term)
+        )
